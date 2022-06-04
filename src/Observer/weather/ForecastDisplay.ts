@@ -12,15 +12,9 @@ class ForecastDisplay implements IObserver, IDisplayElement {
     weatherData.registerObserver(this);
   }
 
-  public update = ({
-    pressure,
-  }: {
-    temp: number;
-    humidity: number;
-    pressure: number;
-  }) => {
+  public update = () => {
     this.lastPressure = this.currentPressure;
-    this.currentPressure = pressure;
+    this.currentPressure = this.weatherData.getPressure();
 
     this.display();
   };

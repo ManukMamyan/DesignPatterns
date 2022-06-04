@@ -11,14 +11,10 @@ class HeatIndexDisplay implements IObserver, IDisplayElement {
     weatherData.registerObserver(this);
   }
 
-  public update = ({
-    temp,
-    humidity,
-  }: {
-    temp: number;
-    humidity: number;
-    pressure: number;
-  }) => {
+  public update = () => {
+    const temp = this.weatherData.getTemperature();
+    const humidity = this.weatherData.getHumidity();
+
     this.heatIndex = +this.computeHeatIndex(temp, humidity).toFixed(5);
 
     this.display();

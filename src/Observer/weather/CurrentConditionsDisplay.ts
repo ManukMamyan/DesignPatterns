@@ -12,16 +12,9 @@ class CurrentConditionsDisplay implements IObserver, IDisplayElement {
     weatherData.registerObserver(this);
   }
 
-  public update = ({
-    temp,
-    humidity,
-  }: {
-    temp: number;
-    humidity: number;
-    pressure: number;
-  }) => {
-    this.temperature = temp;
-    this.humidity = humidity;
+  public update = () => {
+    this.temperature = this.weatherData.getTemperature();
+    this.humidity = this.weatherData.getHumidity();
     this.display();
   };
 

@@ -14,13 +14,9 @@ class StatisticsDisplay implements IObserver, IDisplayElement {
     weatherData.registerObserver(this);
   }
 
-  public update = ({
-    temp,
-  }: {
-    temp: number;
-    humidity: number;
-    pressure: number;
-  }) => {
+  public update = () => {
+    const temp = this.weatherData.getTemperature();
+
     this.tempSum += temp;
     this.numReadings++;
 

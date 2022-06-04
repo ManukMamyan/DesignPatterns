@@ -7,23 +7,19 @@ class WeatherData implements ISubject {
   private humidity!: number;
   private pressure!: number;
 
-  registerObserver = (observer: IObserver) => {
+  public registerObserver = (observer: IObserver) => {
     this.observers.push(observer);
   };
 
-  removeObserver = (observer: IObserver) => {
+  public removeObserver = (observer: IObserver) => {
     this.observers.filter((observerObj) => {
       return observerObj !== observer;
     });
   };
 
-  notifyObservers = () => {
+  public notifyObservers = () => {
     this.observers.forEach((observer) => {
-      observer.update({
-        temp: this.temperature,
-        humidity: this.humidity,
-        pressure: this.pressure,
-      });
+      observer.update();
     });
   };
 
@@ -45,6 +41,18 @@ class WeatherData implements ISubject {
     this.pressure = pressure;
     this.measurementsChanged();
   };
+
+  public getTemperature() {
+    return this.temperature;
+  }
+
+  public getHumidity() {
+    return this.humidity;
+  }
+
+  public getPressure() {
+    return this.pressure;
+  }
 }
 
 export default WeatherData;
